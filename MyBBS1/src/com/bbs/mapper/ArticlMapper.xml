@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.ArticlMapper">
+   <!-- 查询发帖信息 -->
+   <select id="queryAllArticl" resultType="com.bbs.pojo.Articl">
+    select * from articl order by create_time desc
+   </select>
+    <!-- 根据aid查发帖信息 -->
+    <select id="findArticlByAid" parameterType="int" resultType="com.bbs.pojo.Articl" >
+      select * from articl where aid=#{v}
+    </select>
+   <!-- 根据uid查发帖信息 -->
+   <select id="findArticlByUid" parameterType="int" resultType="com.bbs.pojo.Articl">
+    select * from articl where uid=#{uid} order by create_time desc
+   </select>
+   <!-- 根据bid查发帖信息 -->
+   <select id="findArticlBid" parameterType="int" resultType="com.bbs.pojo.Articl">
+   select * from articl where bid=#{bid} order by create_time desc
+   </select>
+   <!-- 发帖 -->
+   <insert id="addArticl" parameterType="com.bbs.pojo.Articl">
+   insert into articl (bid,uid,a_topic,a_body,create_time) values (#{bid},#{uid},#{a_topic},#{a_body},#{create_time})
+   
+   </insert>
+   <!-- 更新帖子 -->
+   <update id="updateArticl" parameterType="com.bbs.pojo.Articl">
+   update articl set a_topic=#{a_topic},a_body=#{a_body},reply_count=#{reply_count},scan_count=#{scan_coumt},like_count=#{like_count}
+   where aid=#{aid}
+   </update>
+   <!-- 删除帖子 -->
+   <delete id="deleteArticl" parameterType="int">
+   delete from articl where aid=#{aid}
+   </delete>
+  
+   <update id="addScan" parameterType="com.bbs.pojo.Articl">
+      update articl set sacn_count=#{sacn_count} where aid=#{aid}
+   </update>
+  
+  <update id="addLike" parameterType="com.bbs.pojo.Articl">
+      update articl set like_count=#{like_count} where aid=#{aid}
+   </update>
+   <update id="addReply" parameterType="com.bbs.pojo.Articl">
+      update articl set reply_count=#{reply_count} where aid=#{aid}
+   </update>
+</mapper>

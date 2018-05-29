@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 编写sql语句 -->
+<mapper namespace="com.bbs.mapper.UserMapper">
+    <!--验证用户信息  -->
+      <select id="checkUser" parameterType="com.bbs.pojo.User" resultType="com.bbs.pojo.User">
+         select * from user where uname=#{uname} and upassword=#{upassword}
+      </select>
+    <!-- 查询所有用户 -->
+    <select id="queryAllUser" resultType="com.bbs.pojo.User">
+      select *from user
+    </select>
+    <!--通过名字查用户  -->
+    <select id="findUserByname" parameterType="String" resultType="com.bbs.pojo.User">
+    select * from user where uname=#{name}
+    </select>
+   <!--通过ID查询用户  -->
+   <select id="findUserByID" parameterType="Integer" resultType="com.bbs.pojo.User">
+     select * from user where uid=#{v}
+   </select>
+   <!-- 增加用户 --> 
+   <insert id="addUser" parameterType="com.bbs.pojo.User">
+    insert into user (uname,upassword,uheadimg,uemail,create_time) values (#{uname},#{upassword},#{uheadimg},#{uemail},#{create_time})
+   </insert>
+   <!-- 更新信息 -->
+   <update id="updateUserById" parameterType="com.bbs.pojo.User">
+   update user set uname=#{uname},upassword=#{upassword},uheadimg=#{uheadimg},ueamil=#{ueamil}
+   where id=#{uid}
+   </update>
+   <!-- 删除用户 -->
+   <delete id="deleteUserById" parameterType="int">
+   delete from user
+   where id=#{id}
+   </delete>
+</mapper>

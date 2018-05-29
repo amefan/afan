@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.ReplyMapper">
+  <!--通过帖子查评论 -->
+  <select id="findReplyByAid" parameterType="int" resultType="com.bbs.pojo.Reply">
+  select * from reply where aid=#{aid}
+  </select>
+  <!--添加评论  -->
+  <insert id="addReply" parameterType="com.bbs.pojo.Reply">
+  insert into reply (aid,uid,r_body) values(#{aid},#{uid},#{r_body})
+  </insert>
+  <!--删除评论  -->
+  <delete id="deleteReplyById" parameterType="int">
+  delete from reply where rid=#{rid}
+  </delete>
+</mapper>
